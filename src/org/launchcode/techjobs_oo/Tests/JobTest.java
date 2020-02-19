@@ -9,13 +9,9 @@ import static org.junit.Assert.assertTrue;
 
 
 public class JobTest {
-    Job firstJob;
-    Job secondJob;
     Job job;
     @Before
     public void createJobs() {
-        firstJob = new Job() {};
-        secondJob = new Job() {};
         job = new Job("Product tester", new Employer("ACME"),
                 new Location("Desert"), new PositionType("Quality control"),
                 new CoreCompetency("Persistence"));
@@ -24,6 +20,8 @@ public class JobTest {
 
     @Test
     public void testSettingJobId(){
+        Job firstJob = new Job() {};
+        Job secondJob = new Job() {};
         System.out.println(firstJob.getId() + " " + secondJob.getId());
         assertFalse(firstJob.equals(secondJob));
     }
@@ -36,6 +34,7 @@ public class JobTest {
         assertTrue(job.getLocation().getValue() == "Desert");
         assertTrue(job.getPositionType().getValue() == "Quality control");
         assertTrue(job.getCoreCompetency().getValue() == "Persistence");
+        assertTrue(job.getId() == 1);
     }
 
     @Test
@@ -49,5 +48,17 @@ public class JobTest {
         assertFalse(testOne.equals(testTwo));
     }
 
+    @Test
+    public void toStringShouldContainBlankLineBeforeAndAfter(){
+        assertTrue(job.toString().startsWith("_______________"));
+        assertTrue(job.toString().endsWith("_______________"));
+    }
+
+    @Test
+    public void stringContainsLabelAndValuesForAllFields(){
+        assertTrue(job.toString().contains("ID: 1\nName: Product tester\n" +
+                "Employer: ACME\nLocation: Desert\n" +
+                "Position Type: Quality Control\nCore Competency: Persistence\n"));
+    }
 
 }

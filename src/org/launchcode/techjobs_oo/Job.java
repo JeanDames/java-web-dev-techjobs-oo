@@ -46,6 +46,16 @@ public class Job {
         return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        String jobData = "_______________\n" +
+                "ID: " + this.getId() + "\nName: " + this.getName() +
+                "\nEmployer: " + this.getEmployer().getValue() + "\nLocation: " + this.getLocation().getValue() +
+                "\nPosition Type: " + this.getPositionType().getValue() + "\nCore Competency: " + this.getCoreCompetency().getValue() +
+                "\n_______________";
+
+        return jobData;
+    }
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
     //  and id.
