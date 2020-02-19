@@ -11,10 +11,14 @@ import static org.junit.Assert.assertTrue;
 public class JobTest {
     Job firstJob;
     Job secondJob;
+    Job job;
     @Before
     public void createJobs() {
         firstJob = new Job() {};
         secondJob = new Job() {};
+        job = new Job("Product tester", new Employer("ACME"),
+                new Location("Desert"), new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
     };
 
 
@@ -26,16 +30,12 @@ public class JobTest {
 
     @Test
     public void testJobConstructorSetsAllFields(){
-        Job job = new Job("Product tester", new Employer("ACME"),
-                new Location("Desert"), new PositionType("Quality control"),
-                new CoreCompetency("Persistence"));
         assertTrue(job instanceof Job);
         assertTrue(job.getName() == "Product tester");
         assertTrue(job.getEmployer().getValue() == "ACME");
         assertTrue(job.getLocation().getValue() == "Desert");
         assertTrue(job.getPositionType().getValue() == "Quality control");
         assertTrue(job.getCoreCompetency().getValue() == "Persistence");
-        assertTrue(job.getId() == 3);
     }
 
     @Test
@@ -46,5 +46,8 @@ public class JobTest {
         Job testTwo = new Job("Project management", new Employer("TSH"),
                 new Location("STL"), new PositionType("Senior management"),
                 new CoreCompetency("Java"));
+        assertFalse(testOne.equals(testTwo));
     }
+
+
 }
