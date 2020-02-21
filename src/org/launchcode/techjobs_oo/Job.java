@@ -1,5 +1,6 @@
 package org.launchcode.techjobs_oo;
 
+import java.lang.reflect.Field;
 import java.util.Objects;
 
 public class Job {
@@ -19,6 +20,11 @@ public class Job {
     public Job() {
         id = nextId;
         nextId++;
+        this.name = null;
+        this.employer = new Employer(null);
+        this.location = new Location(null);
+        this.positionType = new PositionType(null);
+        this.coreCompetency = new CoreCompetency(null);
     }
 
     public Job(String aName, Employer aEmployer, Location aLocation, PositionType aPositionType, CoreCompetency aCoreCompetency){
@@ -48,14 +54,53 @@ public class Job {
 
     @Override
     public String toString() {
-        String jobData = "_______________\n" +
-                "ID: " + this.getId() + "\nName: " + this.getName() +
-                "\nEmployer: " + this.getEmployer().getValue() + "\nLocation: " + this.getLocation().getValue() +
-                "\nPosition Type: " + this.getPositionType().getValue() + "\nCore Competency: " + this.getCoreCompetency().getValue() +
-                "\n_______________";
+    String returnString = "_______________" + "\nID: " + getId();
+    String name = "\nName: ";
+    String empl = "\nEmployer: ";
+    String loc = "\nLocation: ";
+    String posType = "\nPosition Type: ";
+    String coreComp = "\nCore Competency: ";
+    String notAvailable = "Data not available";
+    int counter = 0;
 
-        return jobData;
+    if(this.getName() == null || this.getName().isEmpty()){
+        this.setName(notAvailable);
+        counter++;
     }
+    returnString += name + getName();
+
+    if(this.getEmployer().getValue() == null || this.getEmployer().toString().isBlank()){
+        this.employer = new Employer("Data not available");
+        counter++;
+    }
+    returnString += empl + getEmployer();
+
+    if(this.getLocation().getValue() == null || this.getLocation().toString().isEmpty()) {
+        this.location = new Location(notAvailable);
+        counter++;
+    }
+    returnString += loc + getLocation();
+
+    if(this.getPositionType().getValue() == null || this.getPositionType().toString().isEmpty()){
+        this.positionType = new PositionType(notAvailable);
+        counter++;
+    }
+    returnString += posType + getPositionType();
+
+    if(this.getCoreCompetency().getValue() == null || this.getCoreCompetency().toString().isEmpty()){
+        this.coreCompetency = new CoreCompetency(notAvailable);
+        counter++;
+    }
+    returnString += coreComp + getCoreCompetency();
+
+    returnString += "\n_______________";
+
+    if(counter == 5){
+        returnString = "OOPS! This job does not seem to exist.";
+    }
+        return returnString;
+    }
+
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
     //  and id.
