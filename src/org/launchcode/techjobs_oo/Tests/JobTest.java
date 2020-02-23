@@ -75,7 +75,7 @@ public class JobTest {
     public void emptyFieldsReturnCustomString(){
         Job missingData = new Job("QA Analyst", new Employer("TSH"),
                 new Location("STL"), new PositionType("Flight Software Admin."),
-        new CoreCompetency());
+        new CoreCompetency(""));
         assertEquals("_______________\nID: " + missingData.getId() + "\nName: QA Analyst" +
                 "\nEmployer: TSH\nLocation: STL" +
                 "\nPosition Type: Flight Software Admin.\nCore Competency: Data not available" +
