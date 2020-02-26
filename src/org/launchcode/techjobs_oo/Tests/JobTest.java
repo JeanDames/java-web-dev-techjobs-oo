@@ -84,6 +84,6 @@ public class JobTest {
 
     @Test
     public void returnOOPSIfOnlyIDExists(){
-        assertEquals("OOPS! This job does not seem to exist.", firstJob.toString());
+        assertEquals("_______________\nOOPS! This job does not seem to exist.\n_______________", firstJob.toString());
     }
 }

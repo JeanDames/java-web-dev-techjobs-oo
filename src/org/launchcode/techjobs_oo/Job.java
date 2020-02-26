@@ -96,7 +96,7 @@ public class Job {
     returnString += "\n_______________";
 
     if(counter == 5){
-        returnString = "OOPS! This job does not seem to exist.";
+        returnString = "_______________\nOOPS! This job does not seem to exist.\n_______________";
     }
         return returnString;
     }
