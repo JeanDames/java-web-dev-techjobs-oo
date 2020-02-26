@@ -54,7 +54,7 @@ public class Job {
 
     @Override
     public String toString() {
-    String returnString = "_______________" + "\nID: " + getId();
+    String returnString = "\nID: " + getId();
     String name = "\nName: ";
     String empl = "\nEmployer: ";
     String loc = "\nLocation: ";
@@ -93,12 +93,11 @@ public class Job {
     }
     returnString += coreComp + getCoreCompetency();
 
-    returnString += "\n_______________";
 
     if(counter == 5){
-        returnString = "_______________\nOOPS! This job does not seem to exist.\n_______________";
+        returnString = "\nOOPS! This job does not seem to exist.";
     }
-        return returnString;
+        return returnString + "\n";
     }
 
 

@@ -56,8 +56,8 @@ public class JobTest {
 
     @Test
     public void toStringShouldContainBlankLineBeforeAndAfter(){
-        assertTrue(job.toString().startsWith("_______________"));
-        assertTrue(job.toString().endsWith("_______________"));
+        assertTrue(job.toString().startsWith("\n"));
+        assertTrue(job.toString().endsWith("\n"));
     }
 
     @Test
@@ -65,10 +65,9 @@ public class JobTest {
         Job stringTest = new Job("Product tester", new Employer("ACME"),
                 new Location("Desert"), new PositionType("Quality Control"),
                 new CoreCompetency("Persistence"));
-        assertEquals("_______________\nID: 12\nName: Product tester" +
+        assertEquals("\nID: 12\nName: Product tester" +
                 "\nEmployer: ACME\nLocation: Desert" +
-                "\nPosition Type: Quality Control\nCore Competency: Persistence" +
-                "\n_______________", stringTest.toString());
+                "\nPosition Type: Quality Control\nCore Competency: Persistence\n" , stringTest.toString());
     }
 
     @Test
@@ -76,14 +75,14 @@ public class JobTest {
         Job missingData = new Job("QA Analyst", new Employer("TSH"),
                 new Location("STL"), new PositionType("Flight Software Admin."),
         new CoreCompetency(""));
-        assertEquals("_______________\nID: " + missingData.getId() + "\nName: QA Analyst" +
+        assertEquals("\nID: " + missingData.getId() + "\nName: QA Analyst" +
                 "\nEmployer: TSH\nLocation: STL" +
                 "\nPosition Type: Flight Software Admin.\nCore Competency: Data not available" +
-                "\n_______________", missingData.toString());
+                "\n", missingData.toString());
     }
 
     @Test
     public void returnOOPSIfOnlyIDExists(){
-        assertEquals("_______________\nOOPS! This job does not seem to exist.\n_______________", firstJob.toString());
+        assertEquals("\nOOPS! This job does not seem to exist.\n", firstJob.toString());
     }
 }
