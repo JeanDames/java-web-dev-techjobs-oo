@@ -1,6 +1,8 @@
 package org.launchcode.techjobs_oo;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Job {
@@ -56,11 +58,9 @@ public class Job {
     public String toString() {
     String returnString = "\nID: " + getId();
     String name = "\nName: ";
-    String empl = "\nEmployer: ";
-    String loc = "\nLocation: ";
-    String posType = "\nPosition Type: ";
-    String coreComp = "\nCore Competency: ";
     String notAvailable = "Data not available";
+    String[] returnStrings = {"\nEmployer: ", "\nLocation: ", "\nPosition Type: ",
+                            "\nCore Competency: "};
     int counter = 0;
 
     if(this.getName() == null || this.getName().isEmpty()){
@@ -69,30 +69,23 @@ public class Job {
     }
     returnString += name + getName();
 
-    if(this.getEmployer().getValue() == null || this.getEmployer().toString().isBlank()){
-        this.employer = new Employer("Data not available");
-        counter++;
-    }
-    returnString += empl + getEmployer();
+        ArrayList<Object> jobFields = new ArrayList<>();
+        jobFields.add(this.getEmployer());
+        jobFields.add(this.getLocation());
+        jobFields.add(this.getPositionType());
+        jobFields.add(this.getCoreCompetency());
 
-    if(this.getLocation().getValue() == null || this.getLocation().toString().isEmpty()) {
-        this.location = new Location(notAvailable);
-        counter++;
-    }
-    returnString += loc + getLocation();
+        for(Object field : jobFields) {
+            if(((JobField)field).getValue() == null || field.toString().isBlank()) {
+                ((JobField) field).setValue(notAvailable);
+                counter ++;
+            }
+        }
 
-    if(this.getPositionType().getValue() == null || this.getPositionType().toString().isEmpty()){
-        this.positionType = new PositionType(notAvailable);
-        counter++;
-    }
-    returnString += posType + getPositionType();
-
-    if(this.getCoreCompetency().getValue() == null || this.getCoreCompetency().toString().isEmpty()){
-        this.coreCompetency = new CoreCompetency(notAvailable);
-        counter++;
-    }
-    returnString += coreComp + getCoreCompetency();
-
+        for(int i=0; i<returnStrings.length; i++){
+            returnStrings[i] += jobFields.get(i);
+            returnString += returnStrings[i];
+        }
 
     if(counter == 5){
         returnString = "\nOOPS! This job does not seem to exist.";
